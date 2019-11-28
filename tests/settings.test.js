@@ -8,7 +8,7 @@ describe('settings', function ( ) {
   var settings = require('../lib/settings')();
 
   it('have defaults ready', function () {
-    settings.timeFormat.should.equal('12');
+    settings.timeFormat.should.equal(12);
     settings.nightMode.should.equal(false);
     settings.showRawbg.should.equal('never');
     settings.customTitle.should.equal('Nightscout');
@@ -29,6 +29,9 @@ describe('settings', function ( ) {
     settings.alarmTimeagoUrgentMins.should.equal(30);
     settings.language.should.equal('en');
     settings.showPlugins.should.equal('');
+    settings.insecureUseHttp.should.equal(false);
+    settings.secureHstsHeader.should.equal(true);
+    settings.secureCsp.should.equal(false);
   });
 
   it('support setting from env vars', function () {
@@ -56,9 +59,10 @@ describe('settings', function ( ) {
       , 'BG_TARGET_TOP'
       , 'BG_TARGET_BOTTOM'
       , 'BG_LOW'
+      , 'SCALE_Y'
     ];
 
-    expected.length.should.equal(23);
+    expected.length.should.equal(24);
 
     var seen = { };
     settings.eachSettingAsEnv(function markSeenNames(name) {
